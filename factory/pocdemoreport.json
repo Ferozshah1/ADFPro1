@@ -1,0 +1,9 @@
+{
+	"name": "pocdemoreport",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "663ed272-14ac-4c43-87f7-4fc406adc2d5",
+		"tenantId": "d7fb33e7-fcba-49c0-be30-02cab59088b5"
+	}
+}
