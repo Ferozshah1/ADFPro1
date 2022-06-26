@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "pocdemoreport"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"Snowflake1_connectionString": {
+			"value": ""
+		},
+		"is_ablob_covidreportings_connectionString": {
+			"value": ""
+		},
+		"is_adl_covidreportinsadl_accountKey": {
+			"value": ""
+		},
+		"sinkcasesanddeaths_accountKey": {
+			"value": ""
+		},
+		"is_adl_covidreportinsadl_properties_typeProperties_url": {
+			"value": "https://reportadl.dfs.core.windows.net/"
+		},
+		"ls_ecdc_covid19_properties_typeProperties_url": {
+			"value": "@{linkedService().sourcebaseURL}"
+		},
+		"sinkcasesanddeaths_properties_typeProperties_url": {
+			"value": "https://reportadl.dfs.core.windows.net/"
+		}
+	}
+}
