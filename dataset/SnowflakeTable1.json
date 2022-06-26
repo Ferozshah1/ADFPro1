@@ -46,8 +46,8 @@
 			},
 			{
 				"name": "REPORTED_DATE",
-				"type": "NUMBER",
-				"precision": 38,
+				"type": "DATE",
+				"precision": 10,
 				"scale": 0
 			},
 			{
