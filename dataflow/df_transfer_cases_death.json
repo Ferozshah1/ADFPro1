@@ -22,10 +22,10 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "final_processed_death_cases",
+						"referenceName": "SnowflakeTable1",
 						"type": "DatasetReference"
 					},
-					"name": "CasesAndDeathsSink"
+					"name": "casesdeaths"
 				}
 			],
 			"transformations": [
@@ -52,8 +52,8 @@
 				"          continent as string,",
 				"          population as integer,",
 				"          indicator as string,",
-				"          daily_count as integer,",
-				"          date as date,",
+				"          daily_count as short,",
+				"          date as string,",
 				"          rate_14_day as double,",
 				"          source as string",
 				"     ),",
@@ -112,12 +112,35 @@
 				"     skipDuplicateMapOutputs: true) ~> selectforsink",
 				"selectforsink sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     umask: 0777,",
-				"     preCommands: [],",
-				"     postCommands: [],",
+				"     input(",
+				"          COUNTRY as string,",
+				"          COUNTRY_CODE_2_DIGIT as string,",
+				"          COUNTRY_CODE_3_DIGIT as string,",
+				"          POPULATION as decimal(38,0),",
+				"          CASES_COUNT as decimal(38,0),",
+				"          DEATHS_COUNT as decimal(38,0),",
+				"          REPORTED_DATE as decimal(38,0),",
+				"          SOURCE as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('hash', 1)) ~> CasesAndDeathsSink"
+				"     mapColumn(",
+				"          COUNTRY = country,",
+				"          COUNTRY_CODE_2_DIGIT = country_code_2_digit,",
+				"          COUNTRY_CODE_3_DIGIT = country_code_3_digit,",
+				"          POPULATION = population,",
+				"          CASES_COUNT = cases_count,",
+				"          DEATHS_COUNT = deaths_count,",
+				"          REPORTED_DATE = reported_date,",
+				"          SOURCE = source",
+				"     ),",
+				"     preCommands: [],",
+				"     postCommands: []) ~> casesdeaths"
 			]
 		}
 	}
